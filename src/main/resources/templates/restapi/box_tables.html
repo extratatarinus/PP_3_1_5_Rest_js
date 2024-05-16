@@ -1,0 +1,332 @@
+<!--vvv шапка листа юзеров vvv-->
+<table th:fragment="fragment_users_table_fill" class="table table-striped table-hover caption-top">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>Email</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Возраст</th>
+        <th>Роль</th>
+        <th>Редактировать</th>
+        <th>Удалить</th>
+    </tr>
+    </thead>
+    <tbody id="users_table_fill"/>
+</table>
+<!--^^^ шапка листа юзеров ^^^-->
+
+<!--vvv модалка редактирования vvv-->
+<div th:fragment="fragment_users_table_edit" class="modal fade"
+     id="modalEdit"
+     tabindex="-1"
+     aria-labelledby="update"
+     aria-hidden="true">
+
+    <div class="modal-dialog">
+        <div class="modal-content text-center fw-bold">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5"
+                    id="update"
+                >Редактирование пользователя</h1>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <form class="offset-1 col-10" id="formEdit">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="id_upd"
+                               class="col-form-label"
+                        >id</label>
+                        <input type="text"
+                               name="id"
+                               class="form-control"
+                               id="id_upd"
+                               readonly/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email_upd"
+                               class="col-form-label"
+                        >email</label>
+                        <input type="text"
+                               name="email"
+                               class="form-control"
+                               id="email_upd"
+                               minlength="0"
+                               maxlength="32"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label for="name_upd"
+                               class="col-form-label"
+                        >Имя</label>
+                        <input type="text"
+                               name="name"
+                               class="form-control"
+                               id="name_upd"
+                               minlength="0"
+                               maxlength="32"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastName_upd"
+                               class="col-form-label"
+                        >Фамилия</label>
+                        <input type="text"
+                               name="lastName"
+                               class="form-control"
+                               id="lastName_upd"
+                               minlength="0"
+                               maxlength="32"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label for="age_upd"
+                               class="col-form-label"
+                        >Возраст</label>
+                        <input type="number"
+                               name="age"
+                               class="form-control"
+                               id="age_upd"
+                               min="0"
+                               max="100"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label for="password_upd"
+                               class="col-form-label"
+                        >Пароль</label>
+                        <input type="password"
+                               name="password"
+                               class="form-control"
+                               id="password_upd"
+                               minlength="4"
+                               maxlength="64"
+                               required
+                        />
+                    </div>
+                    <label class="font-weight-bold"
+                    >Роль:</label>
+                    <a id="edit_check_roles">
+                    </a>
+                </div><!--  -->
+                <div class="modal-footer justify-content-evenly">
+                    <button type="button"
+                            id="editClose"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                    >Закрыть
+                    </button>
+                    <button type="submit"
+                            class="btn btn-success"
+                    >Обновить
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--^^^ модалка редактирования ^^^-->
+
+<!--vvv модалка удаления vvv-->
+<div th:fragment="fragment_users_table_delete" class="modal fade"
+     id="modalDelete"
+     tabindex="-1"
+     aria-labelledby="delete"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content text-center fw-bold">
+            <div class="modal-header">
+                <h1 class="modal-title fs-4"
+                    id="delete"
+                >Удаление пользователя</h1>
+                <button type="button" class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Закрыть">
+                </button>
+            </div>
+            <form class="offset-1 col-10" id="formDelete">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="id_del"
+                               class="col-form-label"
+                        >id</label>
+                        <input type="text"
+                               name="id"
+                               class="form-control"
+                               id="id_del"
+                               disabled
+                               readonly/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email_del"
+                               class="col-form-label"
+                        >email</label>
+                        <input type="text"
+                               name="email"
+                               class="form-control"
+                               id="email_del"
+                               disabled readonly/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="name_del"
+                               class="col-form-label"
+                        >Имя</label>
+                        <input type="text"
+                               name="name"
+                               class="form-control"
+                               id="name_del"
+                               disabled readonly/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastName_del"
+                               class="col-form-label"
+                        >Фамилия</label>
+                        <input type="text"
+                               name="lastName"
+                               class="form-control"
+                               id="lastName_del"
+                               disabled readonly/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="age_del"
+                               class="col-form-label"
+                        >age</label>
+                        <input type="text"
+                               name="age"
+                               class="form-control"
+                               id="age_del"
+                               disabled readonly/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password_upd"
+                               class="col-form-label"
+                        >Пароль</label>
+                        <input type="password"
+                               name="password"
+                               class="form-control"
+                               id="password_del"
+                               minlength="4"
+                               maxlength="64"
+                               disabled
+                        />
+                    </div>
+                    <label class="font-weight-bold"
+                    >Роль: </label>
+                    <a id="delete_check_roles" aria-disabled>
+                    </a>
+                </div>
+                <div class="modal-footer justify-content-evenly">
+                    <button type="button"
+                            id="deleteClose"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                    >Закрыть
+                    </button>
+                    <button type="submit"
+                            class="btn btn-danger"
+                    >Удалить
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--^^^ модалка удаления ^^^-->
+
+<!--vvv форма добавления нового пользователя vvv-->
+
+<div th:fragment="fragment_new_user" class="tab-pane fade"
+     id="new-user">
+    <div class="card">
+        <h5 class="card-header"
+        >Добавить нового пользователя</h5>
+        <div class="card-body text-center fw-bold">
+            <form class="offset-4 col-4"
+                  id="formNew">
+                <div id="emailFieldOuter">
+                    <label class="font-weight-bold"
+                           for="email_new"
+                    >email</label><br>
+                    <input class="form-control"
+                           type="text"
+                           name="email"
+                           id="email_new"
+                           placeholder="Логин"
+                           minlength="3"
+                           maxlength="32"
+                           autocomplete="email"
+                           required
+                    />
+                </div>
+                <br>
+                <label class="font-weight-bold"
+                       for="name_new"
+                >Имя</label><br>
+                <input class="form-control"
+                       type="text"
+                       name="name"
+                       id="name_new"
+                       placeholder="Имя"
+                       minlength="0"
+                       maxlength="32"
+                />
+
+                <br>
+
+                <label class="font-weight-bold"
+                       for="lastName_new"
+                >Фамилия</label><br>
+                <input class="form-control"
+                       type="text"
+                       name="lastName"
+                       id="lastName_new"
+                       placeholder="Фамилия"
+                       minlength="0"
+                       maxlength="32"
+                /><br>
+
+                <label class="font-weight-bold"
+                       for="age_new"
+                >age</label><br>
+                <input class="form-control"
+                       type="number"
+                       name="age"
+                       id="age_new"
+                       placeholder="Возраст"
+                       min="0" max="100"
+                /><br>
+
+                <label class="font-weight-bold"
+                       for="password_new"
+                >Пароль</label><br>
+                <input class="form-control"
+                       type="password"
+                       name="password"
+                       id="password_new"
+                       placeholder="Пароль"
+                       minlength="4"
+                       maxlength="64"
+                       required
+                /><br>
+
+                <label class="font-weight-bold"
+                >Роль:</label>
+                <a id="new_check_roles">
+                </a>
+                <br/><br/>
+                <div class="modal-footer justify-content-evenly">
+                    <button type="submit"
+                            class="btn btn-success"
+                    >Добавить
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--^^^ форма добавления нового пользователя ^^^-->

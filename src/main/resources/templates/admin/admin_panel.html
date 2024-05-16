@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      th:with="lang=${#locale.language}" th:lang="${lang}">
+
+<head th:replace="restapi/box_main :: fragment_head"/>
+<body>
+<nav th:replace="restapi/box_admin :: fragment_top_panel_admin"/>
+<div class="container-fluid">
+    <div class="row">
+        <!--<<< боковая панель admin >>>-->
+        <div th:replace="restapi/box_admin :: fragment_left_panel_admin"/>
+        <!--<<< тело вкладки боковой панели >>>-->
+        <div class="col-9">
+            <div class="tab-content bg-light pt-3"
+                 id="admin-tabContent">
+
+                <!--<<< тело вкладок >>>-->
+                <div class="tab-pane fade show active"
+                     id="admin-tab"
+                     role="tabpanel"
+                     aria-labelledby="side-admin-tab">
+                    <ul class="nav nav-tabs"
+                        role="tablist">
+                        <!--<<< вкладка списка пользователей >>>-->
+                        <li class="nav-item"
+                            role="presentation">
+                            <button class="nav-link active"
+                                    id="users-list-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#all-users"
+                                    type="button"
+                                    href="#nav-users_table"
+                                    role="tab"
+                                    aria-controls="all-users"
+                                    aria-selected="true"
+                            >Список пользователей
+                            </button>
+                        </li>
+                        <!--<<< вкладка добавления >>>-->
+                        <li class="nav-item"
+                            role="presentation">
+                            <button class="nav-link"
+                                    id="new-user-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#new-user"
+                                    type="button"
+                                    role="tab" aria-controls="profile"
+                                    aria-selected="false"
+                            >Добавить пользователя
+                            </button>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+
+                        <!--<<< тело вкладки списка пользователей >>>-->
+                        <div class="tab-pane fade show active"
+                             id="all-users"
+                             role="tabpanel"
+                             aria-labelledby="users-list-tab">
+                            <div class="card">
+                                <div th:replace="restapi/box_tables :: fragment_users_table_fill"/>
+                                <!------------------------------------------------------------------------------------------------>
+                                <!--<<< модалка редактирования >>>-->
+                                <div th:replace="restapi/box_tables :: fragment_users_table_edit"/>
+                                <!--<<< модалка удаления >>>-->
+                                <div th:replace="restapi/box_tables :: fragment_users_table_delete"/>
+                                <!---------------------------------------------------- --------------------------------->
+                            </div>
+                        </div>
+                        <!--<<< форма добавления нового пользователя >>>-->
+                        <div th:replace="restapi/box_tables :: fragment_new_user"/>
+                    </div>
+                </div>
+                <!--<<< информация о текущем пользователе >>>-->
+                <div th:replace="restapi/box_user :: fragment_user_info (isActive=false)"/>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="restapi/box_main :: fragment_scripts"/>
+</body>
+</html>

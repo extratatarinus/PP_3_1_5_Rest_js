@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      th:with="lang=${#locale.language}" th:lang="${lang}">
+
+<head th:replace="restapi/box_main :: fragment_head"/>
+<body>
+<!--  -->
+<nav th:replace="restapi/box_user :: fragment_top_panel_user"/>
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="restapi/box_user :: fragment_left_panel_user"/>
+        <div class="col-9">
+            <div class="tab-content bg-light pt-3"
+                 id="admin-tabContent">
+                <div th:replace="restapi/box_user :: fragment_user_info (isActive=true)"/>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="restapi/box_main :: fragment_scripts"/>
+</body>
+</html>
